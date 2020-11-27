@@ -3,6 +3,9 @@ using FizzBuzz.Interfaces;
 
 namespace FizzBuzz.Outputters
 {
+    /// <summary>
+    /// Console with an K... Outputs and inputs from console.
+    /// </summary>
     public class Konsole : IKonsole
     {
         public virtual string ReadLine()

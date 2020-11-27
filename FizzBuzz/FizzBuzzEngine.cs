@@ -3,9 +3,12 @@ using FizzBuzz.Interfaces;
 
 namespace FizzBuzz
 {
+    /// <summary>
+    /// user interactions and handling for fizzbuzz - console.  
+    /// </summary>
     public class FizzBuzzEngine
     {
-        private readonly BuzzParser fizzbuzzer;
+        private readonly FizzBuzzParser _fizzBuzzParser;
         private readonly IKonsole _konsole;
 
         public IKonsole Konsole => _konsole;
@@ -13,15 +16,14 @@ namespace FizzBuzz
         public FizzBuzzEngine(IKonsole konsole)
         {
             _konsole = konsole;
-            fizzbuzzer = new BuzzParser {Konsole = _konsole};
-            Start();
+            _fizzBuzzParser = new FizzBuzzParser {Konsole = _konsole};
         }
 
-        public void Start()
+        public void Run()
         {
             Konsole.PrintLine("Welcome to UltraBuzz!\n" +
                               "Choose a number between 1-300 to show fizzbuzz\n");
-            Konsole.Print("\nPress any key to continue...");
+            Konsole.Print("\nPress any key to Start...");
             
             Konsole.GetKey();
 
@@ -33,9 +35,9 @@ namespace FizzBuzz
             while (true)
             {
                 Console.Clear();
-                Konsole.PrintLine("Choose a number between 1-300 to show fizzbuzz count.");
+                Konsole.PrintLine("Choose a number between 1-300 to show fizzbuzz count. Type 'exit' to exit.");
                 
-                fizzbuzzer.Run(HandleUserInput());
+                _fizzBuzzParser.Print(HandleUserInput()?? 0);
 
                 Konsole.Print("\nPress Esc to exit or any other key to run again.");
 
@@ -46,8 +48,11 @@ namespace FizzBuzz
                 }
             }
         }
-
-        public int HandleUserInput()
+        /// <summary>
+        /// Loops until user enters a number or types exit.  
+        /// </summary>
+        /// <returns></returns>
+        public int? HandleUserInput()
         {
             while (true)
             {
@@ -57,8 +62,7 @@ namespace FizzBuzz
                 switch (input.ToUpper())
                 {
                     case "EXIT":
-                        Environment.Exit(0);
-                        break;
+                        return null;
                 }
 
                 if (!int.TryParse(input, out var num))

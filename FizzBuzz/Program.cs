@@ -7,7 +7,8 @@ namespace FizzBuzz
     {
         static void Main(string[] args)
         { 
-            new FizzBuzzEngine(new Konsole());
+            var fizz = new FizzBuzzEngine(new Konsole());
+            fizz.Run();
         }
     }
 }

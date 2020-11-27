@@ -1,11 +1,8 @@
-namespace TestProject1
+namespace TestProject1.Outputters
 {
-    public partial class UnitTest1
-    {
-        private struct FizzBuzzTestModel
+    public class FizzBuzzTestModel
         {
             public string Word { get; set; }
             public int Value { get; set; }
         }
-    }
 }
